@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { getAllGames } from "../../redux/actions";
+import { getAllGames, getAllGenres } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../card/card";
 
@@ -9,15 +9,44 @@ const Home  = () =>{
 
 const dispatch = useDispatch();
 const allVideoGames = useSelector(state => state.videoGames);
+let genresOnDb = useSelector(state => state.genres);
 
 useEffect(()=>{
-    dispatch(getAllGames())
+    dispatch(getAllGames());
 },[dispatch]);
+useEffect(()=>{
+    dispatch(getAllGenres());
+},[]);
+
+function reloadMain(e){
+    e.preventDefault();
+    dispatch(getAllGames())
+}
 
     return(
         <div>
             <h1>Home madafaka</h1>
             <hr />
+            <button value='reload' onClick={e => reloadMain(e)}>Reload</button>
+            <div>
+                <select>
+                    <option value="A-z">Ascendente</option>
+                    <option value="Z-a">Descendente</option>
+                </select>
+                <select>
+                    <option value="Mayor">Mejor Puntuados</option>
+                    <option value="Menor">Peor Puntuados</option>
+                </select>
+                <select>
+                {
+                    genresOnDb?.map(gen =>{
+                        return(
+                                <option value={gen}>{gen}</option>
+                        )
+                    })
+                }
+                </select>
+            </div>
             {
                 allVideoGames?.map( vg =>{
                     return (

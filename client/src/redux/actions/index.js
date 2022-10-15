@@ -30,10 +30,17 @@ export const getGameByName=(name)=>{
 }
 //Busco Videogame por ID
 export const getGameByID=(id)=>{
+try {
     return async (dispatch)=>{
         const json = await axios.get(`http://localhost:3001/videogame/${id}`);
         return dispatch({type: GET_GAME_BY_ID, payload: json.data})
     }
+} catch (error) {
+    return (dispatch)=>{
+        return dispatch({type: 'ERROR', payload:'error'});
+    }
+    
+}  
 }
 //Creo un Juego
 export const createGame=(data)=>{

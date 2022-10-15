@@ -4,18 +4,20 @@ import Home from "./components/home/home";
 import Nav from "./components/NavBar/nav";
 import Detail from "./components/detail/detail";
 import CreateVideogame from "./components/create_vg/create_vg";
+import Error404 from "./components/error404/error404";
 import './App.css';
 import React from "react";
 
 function App() {
   return (
     <div className="App">
-      
+        <Nav/>
         <Switch>
         <Route exact path='/' render={()=> <Landing/>}/>
         <Route exact path='/home' component={Home}/>
         <Route exact path='/create' component={CreateVideogame}/>
         <Route path='/videogame/:id' component={Detail}/>
+        <Route path='*' component={Error404}/>
         </Switch>
       
     </div>

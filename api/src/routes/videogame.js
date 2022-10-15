@@ -25,7 +25,7 @@ router.get('/:id', async (req,res)=>{
                 }
             return res.status(200).json(obj);
             }
-            else{
+            else {
                 let details = await axios.get(`https://api.rawg.io/api/games/${id}?key=${APIKEY}`);
                 let {background_image, name, description_raw, genres, released, rating, platforms} = details.data;
                 let fillPlatforms = platforms.map(prop => prop.platform.name);
@@ -40,6 +40,7 @@ router.get('/:id', async (req,res)=>{
                     }
                 return res.status(200).json(obj);
             }
+           
         
     } catch (error) {
         console.error(error)

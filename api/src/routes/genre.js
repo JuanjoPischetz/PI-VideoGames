@@ -7,6 +7,11 @@ const router = Router();
 
 router.get('/', async (req,res)=>{
     try {
+        const cache = await Genre.findAll();
+        if(cache.length){
+            let cache2 = cache.map(m=>m.name);
+            return res.status(200).send(cache2);
+        }
         let response = await axios.get(`https://api.rawg.io/api/genres?key=${APIKEY}`);
         let {results} = response.data;
         let filtrados = results.map(e => {

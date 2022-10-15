@@ -38,6 +38,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 videoGames: state.videoGames.filter(game => game.id !== action.payload)
             }
+        case 'ERROR':
+            return{
+                ...state,
+                game: 'error'
+            }
+
         default: return state;
     }
 };

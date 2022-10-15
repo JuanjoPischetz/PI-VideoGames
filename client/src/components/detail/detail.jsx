@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
 import { getGameByID } from "../../redux/actions";
@@ -42,7 +42,8 @@ useEffect(()=>{
                 </div>
             )
         }
-        else return null;
+        if(allDetails === 'error') return <Redirect to='/*'/>
+        else return null
 
 }
 
