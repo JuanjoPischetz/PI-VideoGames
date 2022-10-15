@@ -18,9 +18,6 @@ useEffect(()=>{
         if (allDetails?.name){
             return (
                 <div>
-                    <Link to='/home'>
-                        <button>Back</button>
-                    </Link>
                     <div>
                         <img src={allDetails.image} alt="imagen del juego" />
                         <span>{allDetails.description}</span>

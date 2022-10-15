@@ -4,12 +4,23 @@ import {useDispatch, useSelector } from 'react-redux';
 import { getAllGames, getAllGenres } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../card/card";
+import Paginado from "../paginado/paginado";
 
 const Home  = () =>{
 
 const dispatch = useDispatch();
 const allVideoGames = useSelector(state => state.videoGames);
 let genresOnDb = useSelector(state => state.genres);
+const [currentPage, setCurrentPage] = useState(1);
+const [howManyGames, setHowManyGames] = useState(15);
+const lastIndex = currentPage * howManyGames;
+const firstIndex = lastIndex - howManyGames;
+const showGames = allVideoGames.slice(firstIndex, lastIndex);
+
+const pages = (pageNum)=>{
+    setCurrentPage(pageNum);
+}
+
 
 useEffect(()=>{
     dispatch(getAllGames());
@@ -47,8 +58,13 @@ function reloadMain(e){
                 }
                 </select>
             </div>
+            <Paginado
+            howManyGames={howManyGames}
+            allVideoGames = {allVideoGames.length}
+            pages={pages}
+            />
             {
-                allVideoGames?.map( vg =>{
+                showGames?.map( vg =>{
                     return (
                         <div>
                             <Card image={vg.image} name={vg.name} genres={vg.genres} id={vg.id} />

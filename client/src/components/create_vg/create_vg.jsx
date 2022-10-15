@@ -17,9 +17,6 @@ useEffect(()=>{
         return(
 
             <div>
-                <Link to='/home'>
-                    <button>Back</button>
-                </Link>
                 <h2>{genresOnDb.join(', ')}</h2>
             </div>
         )
