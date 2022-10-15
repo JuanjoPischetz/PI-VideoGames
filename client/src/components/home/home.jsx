@@ -12,6 +12,8 @@ const dispatch = useDispatch();
 const allVideoGames = useSelector(state => state.videoGames);
 let genresOnDb = useSelector(state => state.genres);
 const [currentPage, setCurrentPage] = useState(1);
+const [nextPage, setNextPage] = useState(2);
+const [prevPage, setPrevPage] = useState();
 const [howManyGames, setHowManyGames] = useState(15);
 const lastIndex = currentPage * howManyGames;
 const firstIndex = lastIndex - howManyGames;
@@ -19,6 +21,8 @@ const showGames = allVideoGames.slice(firstIndex, lastIndex);
 
 const pages = (pageNum)=>{
     setCurrentPage(pageNum);
+    setNextPage(pageNum +1);
+    setPrevPage(pageNum-1);
 }
 
 
@@ -61,7 +65,8 @@ function reloadMain(e){
             <Paginado
             howManyGames={howManyGames}
             allVideoGames = {allVideoGames.length}
-            pages={pages}
+            pages={pages} current={currentPage}
+            next = {nextPage} prev={prevPage}
             />
             {
                 showGames?.map( vg =>{
