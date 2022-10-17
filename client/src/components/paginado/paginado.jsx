@@ -5,11 +5,12 @@ const Paginado = ({howManyGames, allVideoGames, pages, current, next, prev})=>{
     for(let i =1; i <= Math.ceil(allVideoGames/howManyGames);i++){
         paginas.push(i);
     }
-    console.log(paginas)
     return(
         <nav>
-            <ul >
-            { current !== 1 && <button onClick={()=>pages(prev)}>PREV</button>}
+            {
+                !paginas.length ? <h1>Si lees esto me debes una birra</h1>:
+                <ul >
+            { (current !== paginas[0]) && <button onClick={()=>pages(prev)}>PREV</button>}
                 {
                     paginas?.map(n =>{
                         return(
@@ -19,8 +20,10 @@ const Paginado = ({howManyGames, allVideoGames, pages, current, next, prev})=>{
                         )
                     })
                 }
-            {current !== 7 && <button onClick={()=>pages(next)}>NEXT</button>}
+            {(current !== paginas[(paginas.length)-1]) && <button onClick={()=>pages(next)}>NEXT</button>}
             </ul>
+            }
+            
         </nav>
     )
 

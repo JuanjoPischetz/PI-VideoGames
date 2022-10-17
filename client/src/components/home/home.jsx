@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { getAllGames, getAllGenres } from "../../redux/actions";
+import { getAllGames, getAllGenres, filterByGender, filterByCreated } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../card/card";
 import Paginado from "../paginado/paginado";
@@ -37,6 +37,15 @@ function reloadMain(e){
     e.preventDefault();
     dispatch(getAllGames())
 }
+function handleFilterGenres(e){
+    setCurrentPage(1);
+    dispatch(filterByGender(e.target.value));
+}
+function handleFilterCreated(e){
+    setCurrentPage(1);
+    dispatch(filterByCreated(e.target.value));
+}
+
 
     return(
         <div>
@@ -44,15 +53,21 @@ function reloadMain(e){
             <hr />
             <button value='reload' onClick={e => reloadMain(e)}>Reload</button>
             <div>
+                <select onChange={(e)=> handleFilterCreated(e)}>
+                    <option value="All"> Todos</option>
+                    <option value="myGames">Mis Juegos</option>
+                    <option value="API">Otros Juegos</option>
+                </select>
                 <select>
-                    <option value="A-z">Ascendente</option>
-                    <option value="Z-a">Descendente</option>
+                    <option value="A-z">A-Z</option>
+                    <option value="Z-a">Z-A</option>
                 </select>
                 <select>
                     <option value="Mayor">Mejor Puntuados</option>
                     <option value="Menor">Peor Puntuados</option>
                 </select>
-                <select>
+                <select onChange={(e)=> handleFilterGenres(e)}>
+                    <option value="allGenres">Todos</option>
                 {
                     genresOnDb?.map(gen =>{
                         return(

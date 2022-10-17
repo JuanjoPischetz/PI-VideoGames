@@ -5,6 +5,8 @@ export const GET_GAME_BY_NAME = 'GET_GAME_BY_NAME';
 export const CREATE_GAME = 'CREATE_GAME';
 export const GET_GAME_BY_ID = 'GET_GAME_BY_ID';
 export const GET_ALL_GENRES = 'GET_ALL_GENRES';
+export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
+export const FILTER_BY_CREATED= 'FILTER_BY_CREATED';
 export const DELETE_GAME = 'DELETE_GAME';
 
 //obtengo todos los juegos
@@ -30,23 +32,31 @@ export const getGameByName=(name)=>{
 }
 //Busco Videogame por ID
 export const getGameByID=(id)=>{
-try {
+
     return async (dispatch)=>{
         const json = await axios.get(`http://localhost:3001/videogame/${id}`);
         return dispatch({type: GET_GAME_BY_ID, payload: json.data})
     }
-} catch (error) {
-    return (dispatch)=>{
-        return dispatch({type: 'ERROR', payload:'error'});
-    }
-    
-}  
 }
 //Creo un Juego
 export const createGame=(data)=>{
     return {
         type: CREATE_GAME,
         payload: {...data}
+    }
+}
+//filtrado por genero
+export const filterByGender=(genres)=>{
+    return{
+        type: FILTER_BY_GENRE,
+        payload:genres
+    }
+}
+//filtrado por creado/existente en API
+export const filterByCreated = (data) =>{
+    return{
+        type: FILTER_BY_CREATED,
+        payload:data
     }
 }
 //Borro un juego

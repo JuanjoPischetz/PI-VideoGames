@@ -1,7 +1,9 @@
-import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES, CREATE_GAME, DELETE_GAME } from "../actions";
+import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES,
+    FILTER_BY_GENRE, CREATE_GAME,FILTER_BY_CREATED, DELETE_GAME } from "../actions";
 
 const initialState = {
     videoGames:[],
+    videoGamesCopy:[],
     game:{},
     genres:[],
 };
@@ -11,7 +13,8 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_GAMES :
             return{
                 ...state,
-                videoGames: action.payload
+                videoGames: action.payload,
+                videoGamesCopy: action.payload
             }
         case GET_GAME_BY_NAME:
             return {
@@ -33,17 +36,27 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 videoGames: [...state.videoGames, action.payload]
             }
+        case FILTER_BY_GENRE:
+            const allVideoGames = state.videoGamesCopy;
+            const videoGamesFilter = action.payload  === 'allGenres' ? allVideoGames
+            : allVideoGames.slice().filter( e => e.genres.toString().includes(action.payload))
+            return{
+                ...state,
+                videoGames: videoGamesFilter
+            }
+        case FILTER_BY_CREATED:
+            const everyVideoGame = state.videoGamesCopy
+            const createdOrApi = action.payload === 'myGames' ? everyVideoGame.filter(e => typeof e.id === 'string') 
+            : everyVideoGame.filter( e => (e.id)/(e.id)=== 1);
+            return{
+                ...state,
+                videoGames: action.payload === 'All' ? everyVideoGame : createdOrApi
+            }
         case DELETE_GAME:
             return{
                 ...state,
                 videoGames: state.videoGames.filter(game => game.id !== action.payload)
             }
-        case 'ERROR':
-            return{
-                ...state,
-                game: 'error'
-            }
-
         default: return state;
     }
 };
