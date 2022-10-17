@@ -4,6 +4,7 @@ import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES,
 const initialState = {
     videoGames:[],
     videoGamesCopy:[],
+    videoGamesSelected:[],
     game:{},
     genres:[],
 };
@@ -14,7 +15,8 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 videoGames: action.payload,
-                videoGamesCopy: action.payload
+                videoGamesCopy: action.payload,
+                videoGamesSelected: action.payload
             }
         case GET_GAME_BY_NAME:
             return {
@@ -37,7 +39,7 @@ const rootReducer = (state = initialState, action) => {
                 videoGames: [...state.videoGames, action.payload]
             }
         case FILTER_BY_GENRE:
-            const allVideoGames = state.videoGamesCopy;
+            const allVideoGames = state.videoGamesSelected;
             const videoGamesFilter = action.payload  === 'allGenres' ? allVideoGames
             : allVideoGames.slice().filter( e => e.genres.toString().includes(action.payload))
             return{
@@ -50,7 +52,8 @@ const rootReducer = (state = initialState, action) => {
             : everyVideoGame.filter( e => (e.id)/(e.id)=== 1);
             return{
                 ...state,
-                videoGames: action.payload === 'All' ? everyVideoGame : createdOrApi
+                videoGames: action.payload === 'All' ? everyVideoGame : createdOrApi,
+                videoGamesSelected: action.payload === 'All' ? everyVideoGame : createdOrApi
             }
         case DELETE_GAME:
             return{

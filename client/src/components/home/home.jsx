@@ -28,10 +28,9 @@ const pages = (pageNum)=>{
 
 useEffect(()=>{
     dispatch(getAllGames());
-},[dispatch]);
-useEffect(()=>{
     dispatch(getAllGenres());
 },[]);
+
 
 function reloadMain(e){
     e.preventDefault();
