@@ -1,5 +1,5 @@
-import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES,
-    FILTER_BY_GENRE, CREATE_GAME,FILTER_BY_CREATED, DELETE_GAME } from "../actions";
+import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES, ASCENDENTE,
+    FILTER_BY_GENRE, CREATE_GAME,FILTER_BY_CREATED, DELETE_GAME, BY_RATING, FLAG_GLOBAL, CLEANER } from "../actions";
 
 const initialState = {
     videoGames:[],
@@ -7,6 +7,7 @@ const initialState = {
     videoGamesSelected:[],
     game:{},
     genres:[],
+    flag: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -54,6 +55,40 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 videoGames: action.payload === 'All' ? everyVideoGame : createdOrApi,
                 videoGamesSelected: action.payload === 'All' ? everyVideoGame : createdOrApi
+            }
+        case ASCENDENTE:
+            let sorted = action.payload === 'A-z' ?
+            state.videoGames.sort((a,b)=>{
+               return  a.name === b.name ? 0: a.name > b.name ? 1 : -1;
+            })
+            : state.videoGames.sort((a,b)=>{
+               return a.name === b.name ? 0: a.name > b.name ? -1 : 1;
+            })
+            return{
+                ...state,
+                videoGames: sorted
+            }
+        case BY_RATING:
+            let sorted2 = action.payload === 'Menor'?
+            state.videoGames.sort((a,b)=>{
+                return a.rating === b.rating ? 0: a.rating > b.rating ? 1 : -1
+            })
+            : state.videoGames.sort((a,b)=>{
+                return a.rating === b.rating ? 0: a.rating > b.rating ? -1 : 1
+            })
+            return{
+                ...state,
+                videoGames: sorted2
+            }
+        case FLAG_GLOBAL:
+            return{
+                ...state,
+                flag: action.payload
+            }
+        case CLEANER:
+            return{
+                ...state,
+                game: {}
             }
         case DELETE_GAME:
             return{

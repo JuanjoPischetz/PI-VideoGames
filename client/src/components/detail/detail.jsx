@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { getGameByID } from "../../redux/actions";
+import { getGameByID, cleaner } from "../../redux/actions";
 
 const Detail = ()=>{
 
@@ -13,7 +13,7 @@ const {id} = useParams();
 
 useEffect(()=>{
     dispatch(getGameByID(id))
-    // quiero limpiar el componente pero no se como se hace
+    return dispatch(cleaner())
 },[id]);
         if (allDetails?.name){
             return (
@@ -39,7 +39,6 @@ useEffect(()=>{
                 </div>
             )
         }
-        if(allDetails === 'error') return <Redirect to='/*'/>
         else return null
 
 }

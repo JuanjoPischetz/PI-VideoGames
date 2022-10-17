@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { getAllGames, getAllGenres, filterByGender, filterByCreated } from "../../redux/actions";
+import { getAllGames, getAllGenres, filterByGender, flagGlobal,
+         filterByCreated, ascendente, byRating } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../card/card";
 import Paginado from "../paginado/paginado";
@@ -11,10 +12,12 @@ const Home  = () =>{
 const dispatch = useDispatch();
 const allVideoGames = useSelector(state => state.videoGames);
 let genresOnDb = useSelector(state => state.genres);
+let flag = useSelector(state => state.flag);
 const [currentPage, setCurrentPage] = useState(1);
 const [nextPage, setNextPage] = useState(2);
 const [prevPage, setPrevPage] = useState();
 const [howManyGames, setHowManyGames] = useState(15);
+const [flagAz, setFlagAz] = useState('');
 const lastIndex = currentPage * howManyGames;
 const firstIndex = lastIndex - howManyGames;
 const showGames = allVideoGames.slice(firstIndex, lastIndex);
@@ -26,9 +29,12 @@ const pages = (pageNum)=>{
 }
 
 
-useEffect(()=>{
+useEffect( ()=>{
+    if(!flag){
     dispatch(getAllGames());
     dispatch(getAllGenres());
+    }
+    else dispatch(flagGlobal(false));
 },[]);
 
 
@@ -39,12 +45,25 @@ function reloadMain(e){
 function handleFilterGenres(e){
     setCurrentPage(1);
     dispatch(filterByGender(e.target.value));
+    dispatch(flagGlobal(true))
 }
 function handleFilterCreated(e){
     setCurrentPage(1);
     dispatch(filterByCreated(e.target.value));
+    dispatch(flagGlobal(true))
 }
-
+function handleAsc(e){
+    setCurrentPage(1);
+    dispatch(ascendente(e.target.value));
+    dispatch(flagGlobal(true))
+    setFlagAz(`${e.target.value}`)
+}
+function handleRating(e){
+    setCurrentPage(1);
+    dispatch(byRating(e.target.value));
+    dispatch(flagGlobal(true))
+    setFlagAz(`${e.target.value}`)
+}
 
     return(
         <div>
@@ -57,11 +76,11 @@ function handleFilterCreated(e){
                     <option value="myGames">Mis Juegos</option>
                     <option value="API">Otros Juegos</option>
                 </select>
-                <select>
+                <select onChange={e => handleAsc(e)}>
                     <option value="A-z">A-Z</option>
                     <option value="Z-a">Z-A</option>
                 </select>
-                <select>
+                <select onChange={e => handleRating(e)}>
                     <option value="Mayor">Mejor Puntuados</option>
                     <option value="Menor">Peor Puntuados</option>
                 </select>

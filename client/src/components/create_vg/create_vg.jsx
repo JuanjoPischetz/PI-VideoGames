@@ -2,7 +2,7 @@ import React from "react";
 import { Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { createGame, deleteGame, getAllGenres } from "../../redux/actions";
+import { createGame,getAllGenres } from "../../redux/actions";
 
 const CreateVideogame = () =>{
 

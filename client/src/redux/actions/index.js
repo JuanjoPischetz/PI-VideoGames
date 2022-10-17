@@ -8,6 +8,10 @@ export const GET_ALL_GENRES = 'GET_ALL_GENRES';
 export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
 export const FILTER_BY_CREATED= 'FILTER_BY_CREATED';
 export const DELETE_GAME = 'DELETE_GAME';
+export const ASCENDENTE = 'ASCENDENTE';
+export const BY_RATING = 'BY_RATING';
+export const FLAG_GLOBAL = 'FLAG_GLOBAL';
+export const CLEANER = 'CLEANER';
 
 //obtengo todos los juegos
 export const getAllGames=()=>{
@@ -59,6 +63,33 @@ export const filterByCreated = (data) =>{
         payload:data
     }
 }
+// ordeno ascendente 
+export const ascendente = (data) =>{
+    return{
+        type: ASCENDENTE,
+        payload: data
+    }
+}
+//ordeno por rating
+export const byRating = (data)=>{
+    return{
+        type: BY_RATING,
+        payload:data
+    }
+}
+//flag global
+export const flagGlobal = (data)=>{
+    return{
+        type: FLAG_GLOBAL,
+        payload:data
+    }
+}
+//clean details
+export const cleaner = ()=>{
+    return{
+        type:CLEANER
+    }
+}
 //Borro un juego
 export const deleteGame =(id)=>{
     return{
@@ -66,6 +97,7 @@ export const deleteGame =(id)=>{
         payload: id
     }
 }
+
 /*
 export const getAllGames = () => dispatch => {
     return fetch('http://localhost:3001/videogames')
