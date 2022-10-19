@@ -9,15 +9,23 @@ const Detail = ()=>{
 const dispatch = useDispatch();
 let allDetails = useSelector(state => state.game);
 const {id} = useParams();
-
+const flag = useSelector(state => state.flag_404);
 
 useEffect(()=>{
     dispatch(getGameByID(id))
     return dispatch(cleaner())
 },[id]);
+        if (flag){
+           return <Redirect to='/*'/>
+        }
         if (allDetails?.name){
             return (
                 <div>
+                     <div>
+                        <Link to='/home'>
+                        <button>Home</button>
+                        </Link>
+                    </div>
                     <div>
                         <img src={allDetails.image} alt="imagen del juego" />
                         <span>{allDetails.description}</span>
@@ -39,7 +47,7 @@ useEffect(()=>{
                 </div>
             )
         }
-        else return null
+        else return null;
 
 }
 

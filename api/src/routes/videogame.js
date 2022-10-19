@@ -44,7 +44,7 @@ router.get('/:id', async (req,res)=>{
         
     } catch (error) {
         console.error(error)
-        res.status(400).send('ID inexistente');
+        res.status(400).send('ID inexistente')
     }
 
 })

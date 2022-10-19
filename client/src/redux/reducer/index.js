@@ -1,4 +1,4 @@
-import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES, ASCENDENTE,
+import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES, ASCENDENTE, REDIRECT, RESET_FLAG404,
     FILTER_BY_GENRE, CREATE_GAME,FILTER_BY_CREATED, DELETE_GAME, BY_RATING, FLAG_GLOBAL, CLEANER } from "../actions";
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
     game:{},
     genres:[],
     flag: false,
+    flag_404:false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,7 +23,9 @@ const rootReducer = (state = initialState, action) => {
         case GET_GAME_BY_NAME:
             return {
                 ...state,
-                videoGames: action.payload
+                videoGames: action.payload,
+                videoGamesCopy: action.payload,
+                videoGamesSelected: action.payload
             }
         case GET_ALL_GENRES:
             return {
@@ -88,7 +91,17 @@ const rootReducer = (state = initialState, action) => {
         case CLEANER:
             return{
                 ...state,
-                game: {}
+                game: {},
+            }
+        case REDIRECT:
+            return{
+                ...state,
+                flag_404: action.payload
+            }
+        case RESET_FLAG404:
+            return{
+                ...state,
+                flag_404:false
             }
         case DELETE_GAME:
             return{

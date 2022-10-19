@@ -23,7 +23,7 @@ router.get('/', async (req,res)=>{
            });
         const data = await Genre.bulkCreate(filtrados);
         const data2 = data.map(e=>e.name)
-        return res.status(200).send(data2);
+        return res.status(200).send(data2); // se va para el cliente
         
     } catch (error) {
         console.error(error)

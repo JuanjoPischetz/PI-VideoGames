@@ -1,4 +1,4 @@
-//const axios = require('axios');
+
 import axios from 'axios';
 export const GET_ALL_GAMES = 'GET_ALL_GAMES';
 export const GET_GAME_BY_NAME = 'GET_GAME_BY_NAME';
@@ -12,6 +12,8 @@ export const ASCENDENTE = 'ASCENDENTE';
 export const BY_RATING = 'BY_RATING';
 export const FLAG_GLOBAL = 'FLAG_GLOBAL';
 export const CLEANER = 'CLEANER';
+export const REDIRECT = 'REDIRECT';
+export const RESET_FLAG404 = 'RESET_FLAG404';
 
 //obtengo todos los juegos
 export const getAllGames=()=>{
@@ -38,15 +40,23 @@ export const getGameByName=(name)=>{
 export const getGameByID=(id)=>{
 
     return async (dispatch)=>{
+        try {
         const json = await axios.get(`http://localhost:3001/videogame/${id}`);
+        console.log(json);
         return dispatch({type: GET_GAME_BY_ID, payload: json.data})
+        } catch (error) {
+        return dispatch({type: REDIRECT, payload:true})
+        }
     }
 }
 //Creo un Juego
 export const createGame=(data)=>{
-    return {
-        type: CREATE_GAME,
-        payload: {...data}
+    try {
+        return async ()=>{
+            await axios.post('http://localhost:3001/videogames', data)
+        }
+    } catch (error) {
+        console.error(error);
     }
 }
 //filtrado por genero
@@ -88,6 +98,12 @@ export const flagGlobal = (data)=>{
 export const cleaner = ()=>{
     return{
         type:CLEANER
+    }
+}
+// reset error 404
+export const resetFlag404 = ()=>{
+    return{
+        type:RESET_FLAG404
     }
 }
 //Borro un juego

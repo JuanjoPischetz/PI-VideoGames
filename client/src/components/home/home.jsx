@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
 import { getAllGames, getAllGenres, filterByGender, flagGlobal,
-         filterByCreated, ascendente, byRating } from "../../redux/actions";
+         filterByCreated, ascendente, byRating, getGameByName } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../card/card";
 import Paginado from "../paginado/paginado";
@@ -18,6 +18,7 @@ const [nextPage, setNextPage] = useState(2);
 const [prevPage, setPrevPage] = useState();
 const [howManyGames, setHowManyGames] = useState(15);
 const [flagAz, setFlagAz] = useState('');
+const [searchBar, setSearchBar] = useState('');
 const lastIndex = currentPage * howManyGames;
 const firstIndex = lastIndex - howManyGames;
 const showGames = allVideoGames.slice(firstIndex, lastIndex);
@@ -41,6 +42,14 @@ useEffect( ()=>{
 function reloadMain(e){
     e.preventDefault();
     dispatch(getAllGames())
+}
+function handleInput(e){
+    setSearchBar(e.target.value);
+}
+async function handleSearch(){
+    await dispatch(getGameByName(searchBar))
+    pages(1)
+    dispatch(flagGlobal(true))
 }
 function handleFilterGenres(e){
     setCurrentPage(1);
@@ -69,8 +78,12 @@ function handleRating(e){
         <div>
             <h1>Home madafaka</h1>
             <hr />
-            <button value='reload' onClick={e => reloadMain(e)}>Reload</button>
             <div>
+                <input type="search" name="searchBar" placeholder="Ingresa un nombre" value={searchBar} onChange={handleInput}/>
+                <button onClick={handleSearch}>Buscar</button>
+            </div>
+            <div>
+            <button value='reload' onClick={e => reloadMain(e)}>Reload</button>
                 <select onChange={(e)=> handleFilterCreated(e)}>
                     <option value="All"> Todos</option>
                     <option value="myGames">Mis Juegos</option>
