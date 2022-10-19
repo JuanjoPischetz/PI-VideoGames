@@ -60,7 +60,7 @@ router.delete('/:id', async (req,res)=>{
         res.status(404).send('No existe ese juego en nuesta base de datos')
     }
 })
-
+//un comentario
 module.exports = router;
 
 //ejemplo https://api.rawg.io/api/games/3498?key=83d127e0adf64f64a081474c15ff5d2a
