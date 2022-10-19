@@ -1,5 +1,6 @@
-import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES, ASCENDENTE, REDIRECT, RESET_FLAG404,
-    FILTER_BY_GENRE, CREATE_GAME,FILTER_BY_CREATED, DELETE_GAME, BY_RATING, FLAG_GLOBAL, CLEANER } from "../actions";
+import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES, ASCENDENTE,
+     REDIRECT, RESET_FLAG404,FILTER_BY_GENRE, CREATE_GAME,FILTER_BY_CREATED, DELETE_GAME,
+      BY_RATING, FLAG_GLOBAL, CLEANER} from "../actions";
 
 const initialState = {
     videoGames:[],
@@ -9,6 +10,7 @@ const initialState = {
     genres:[],
     flag: false,
     flag_404:false,
+    flag_alert:false,
 };
 
 const rootReducer = (state = initialState, action) => {

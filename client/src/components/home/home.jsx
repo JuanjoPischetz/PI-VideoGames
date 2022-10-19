@@ -7,12 +7,14 @@ import { Link } from "react-router-dom";
 import Card from "../card/card";
 import Paginado from "../paginado/paginado";
 
+
 const Home  = () =>{
 
 const dispatch = useDispatch();
 const allVideoGames = useSelector(state => state.videoGames);
 let genresOnDb = useSelector(state => state.genres);
 let flag = useSelector(state => state.flag);
+let flag_alert = useSelector( state => state.flag_alert);
 const [currentPage, setCurrentPage] = useState(1);
 const [nextPage, setNextPage] = useState(2);
 const [prevPage, setPrevPage] = useState();
@@ -79,6 +81,9 @@ function handleRating(e){
             <h1>Home madafaka</h1>
             <hr />
             <div>
+                <Link to='/create'>
+                <button>Crear Videojuego</button>
+                </Link>
                 <input type="search" name="searchBar" placeholder="Ingresa un nombre" value={searchBar} onChange={handleInput}/>
                 <button onClick={handleSearch}>Buscar</button>
             </div>

@@ -15,6 +15,7 @@ export const CLEANER = 'CLEANER';
 export const REDIRECT = 'REDIRECT';
 export const RESET_FLAG404 = 'RESET_FLAG404';
 
+
 //obtengo todos los juegos
 export const getAllGames=()=>{
     return async (dispatch)=>{
@@ -32,8 +33,13 @@ export const getAllGenres=()=>{
 //Busco Videogame por nombre
 export const getGameByName=(name)=>{
     return async (dispatch)=>{
-        const json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
-        return dispatch({type: GET_GAME_BY_NAME, payload: json.data})
+        try {
+            const json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+            return dispatch({type: GET_GAME_BY_NAME, payload: json.data})
+        } catch (error) {
+            console.error(error);
+            alert('La busqueda no tendrá resultados',error)
+        }
     }
 }
 //Busco Videogame por ID
