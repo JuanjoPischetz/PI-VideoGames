@@ -14,7 +14,6 @@ const dispatch = useDispatch();
 const allVideoGames = useSelector(state => state.videoGames);
 let genresOnDb = useSelector(state => state.genres);
 let flag = useSelector(state => state.flag);
-let flag_alert = useSelector( state => state.flag_alert);
 const [currentPage, setCurrentPage] = useState(1);
 const [nextPage, setNextPage] = useState(2);
 const [prevPage, setPrevPage] = useState();

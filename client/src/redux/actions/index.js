@@ -60,9 +60,11 @@ export const createGame=(data)=>{
     try {
         return async ()=>{
             await axios.post('http://localhost:3001/videogames', data)
+            alert('VideoGame Creado Exitosamente!')
         }
     } catch (error) {
         console.error(error);
+        alert('algo salio mal', error)
     }
 }
 //filtrado por genero
