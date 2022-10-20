@@ -106,10 +106,10 @@ const rootReducer = (state = initialState, action) => {
                 flag_404:false
             }
         case DELETE_GAME:
-            return{
+            return {
                 ...state,
-                videoGames: state.videoGames.filter(game => game.id !== action.payload)
-            }
+                flag:true,
+            };
         default: return state;
     }
 };

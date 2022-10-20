@@ -48,7 +48,6 @@ export const getGameByID=(id)=>{
     return async (dispatch)=>{
         try {
         const json = await axios.get(`http://localhost:3001/videogame/${id}`);
-        console.log(json);
         return dispatch({type: GET_GAME_BY_ID, payload: json.data})
         } catch (error) {
         return dispatch({type: REDIRECT, payload:true})
@@ -64,7 +63,6 @@ export const createGame=(data)=>{
         }
     } catch (error) {
         console.error(error);
-        alert('algo salio mal', error)
     }
 }
 //filtrado por genero
@@ -116,9 +114,13 @@ export const resetFlag404 = ()=>{
 }
 //Borro un juego
 export const deleteGame =(id)=>{
-    return{
-        type:DELETE_GAME,
-        payload: id
+    try {
+        return async ()=>{
+            await axios.delete(`http://localhost:3001/videogame/${id}`);
+            
+        }
+    } catch (error) {
+        alert('El juego ya ha sido eliminado',error);
     }
 }
 

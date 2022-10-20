@@ -17,6 +17,9 @@ const [input, setInput] = useState({
     genres:[]
 })
 const [errors, setErrors] = useState({})
+const platformsArray = ['PC', 'PlayStation 5','PlayStation 4', 'Xbox', 'Xbox 360', 'Sega',
+ 'Sega Genesis', 'Sega Dreamcast', 'Nintendo 64', 'Nintendo Switch', 'Nintendo 3DS', 'GameBoy Advance',
+  'GameBoy Color', 'Android', 'IOs', 'Nintendo Wii']
 
 
 
@@ -56,18 +59,16 @@ const deleteHandler = function(e){
         genres: input.genres.filter(g => g !== e.target.value)
     })
 }
-const checkHandler = function(e){
-    if (input.platforms.includes(e.target.value)) return null
-    if(e.target.checked){
-        setInput({
-            ...input,
-            platforms: [...input.platforms, e.target.value]
-        })
-        setErrors(validaciones({
-            ...input,
-            platforms: [...input.platforms, e.target.value]
-        }))
-    }
+const deleteHandler2 = function(e){
+    e.preventDefault();
+    setInput({
+        ...input,
+        platforms: input.platforms.filter(g => g !== e.target.value)
+    })
+    setErrors(validaciones({
+        ...input,
+        platforms: input.platforms.filter(g => g !== e.target.value)
+    }))
 }
 
 const selectHandler = function(e){
@@ -75,6 +76,17 @@ const selectHandler = function(e){
         ...input,
         genres: [...input.genres, e.target.value]
     })
+}
+const selectHandler2 = function(e){
+    setInput({
+        ...input,
+        platforms: [...input.platforms, e.target.value]
+    })
+    setErrors(validaciones({
+        ...input,
+        platforms: [...input.platforms,e.target.value]
+    }))
+
 }
   const submitHandler = (evento) => {
     evento.preventDefault();
@@ -119,14 +131,21 @@ const selectHandler = function(e){
                     <input type="text" name="rating" onChange={inputHandler} value={input.rating}/>
                     </div>
                     <div>
-                    <label htmlFor="platforms">Plataformas</label>
-                    <div>
-                    <label htmlFor="Pc"><input type="checkbox" name='Pc' value='Pc' onChange={checkHandler}/>Pc</label>
-                    <label htmlFor="PS5/PS4"><input type="checkbox" name='PS5/PS4' value='PS5/PS4' onChange={checkHandler}/>PS5/PS4</label>
-                    <label htmlFor="Xbox"><input type="checkbox" name='Xbox' value='Xbox' onChange={checkHandler}/>Xbox</label>
-                    <label htmlFor="NintendoSwitch"><input type="checkbox" name='NintendoSwitch' value='NintendoSwitch' onChange={checkHandler}/>NintendoSwitch</label>
-                    <label htmlFor="Meta"><input type="checkbox" name='Meta' value='Meta' onChange={checkHandler}/>Meta</label>
-                    </div>
+                    <label htmlFor="Plataformas">Plataformas</label><select onChange={selectHandler2}>
+                    {!input.platforms.length && <option value='none'>selecciona</option>}
+                    {
+                        platformsArray?.map(gen =>{
+                            return(
+                                <option value={gen}>{gen}</option>
+                                )
+                            })
+                        }
+                    </select> <br />
+                    {input.platforms.length !== 0 && input.platforms.map(gen =>{
+                        return(
+                            <button value={gen} name={gen} onClick={deleteHandler2}>{gen}</button>
+                        )
+                    })}
                     </div>
                     <label htmlFor="Generos">Generos</label><select onChange={selectHandler}>
                     {!input.genres.length && <option value='none'>selecciona</option>}
