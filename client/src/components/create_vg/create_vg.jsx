@@ -30,13 +30,13 @@ const validaciones = function(input){
     if(!input.name){
         errors.name='Complete campo nombre';
     }
-    else if (!input.description){
+    if (!input.description){
         errors.description='Agregue una descripcion';
     }
-    else if(input.rating <= 0 || input.rating>5 || !input.rating){
+    if(input.rating <= 0 || input.rating>5 || !input.rating){
         errors.rating='Califica entre 1 y 5 incluido';
     }
-    else if(!input.platforms){
+    if(!input.platforms.length){
         errors.platforms='Seleccione al menos una plataforma';
     }
     return errors;
@@ -47,9 +47,17 @@ const inputHandler = function(e){
     setErrors(validaciones({
         ...input, [e.target.name]: e.target.value
     }))
+    console.log(errors)
   };
-
+const deleteHandler = function(e){
+    e.preventDefault();
+    setInput({
+        ...input,
+        genres: input.genres.filter(g => g !== e.target.value)
+    })
+}
 const checkHandler = function(e){
+    if (input.platforms.includes(e.target.value)) return null
     if(e.target.checked){
         setInput({
             ...input,
@@ -61,6 +69,7 @@ const checkHandler = function(e){
         }))
     }
 }
+
 const selectHandler = function(e){
     setInput({
         ...input,
@@ -119,7 +128,8 @@ const selectHandler = function(e){
                     <label htmlFor="Meta"><input type="checkbox" name='Meta' value='Meta' onChange={checkHandler}/>Meta</label>
                     </div>
                     </div>
-                    <select onChange={selectHandler}>
+                    <label htmlFor="Generos">Generos</label><select onChange={selectHandler}>
+                    {!input.genres.length && <option value='none'>selecciona</option>}
                     {
                         genresOnDb?.map(gen =>{
                             return(
@@ -128,9 +138,14 @@ const selectHandler = function(e){
                             })
                         }
                     </select> <br />
-                    <span>{input.genres.join(', ')}</span>
+                    {input.genres.length !== 0 && input.genres.map(gen =>{
+                        return(
+                            <button value={gen} name={gen} onClick={deleteHandler}>{gen}</button>
+                        )
+                    })}
                     <div>
-                    {errors.platforms && <button type="submit">Crear!</button>}
+                    {(input.name !== ''&& input.description !== '' && !errors.platforms) 
+                    && <button type="submit">Crear!</button>}
                     </div>
                 </form>
             </div>

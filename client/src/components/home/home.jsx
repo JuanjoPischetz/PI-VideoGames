@@ -35,8 +35,7 @@ useEffect( ()=>{
     if(!flag){
     dispatch(getAllGames());
     dispatch(getAllGenres());
-    }
-    else dispatch(flagGlobal(false));
+    };
 },[]);
 
 
