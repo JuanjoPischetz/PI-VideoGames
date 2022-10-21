@@ -76,8 +76,6 @@ function handleRating(e){
 
     return(
         <div>
-            <h1>Home madafaka</h1>
-            <hr />
             <div>
                 <Link to='/create'>
                 <button>Crear Videojuego</button>

@@ -14,7 +14,9 @@ const Landing = ()=>{
                 <span className={styles.span}>Bienvenido Gamer</span>
             </div>
             <Link to= '/home'>
-                <button className={styles.button}>Home</button>
+            <div className={styles.div_button}>           
+                <span className={styles.button}>Ingresar</span>
+            </div>
             </Link>
             </div>
         </div>
