@@ -1,0 +1,29 @@
+.main{
+    width: 100%;
+    height: 100vh;
+
+}
+
+.video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.content{
+    display: flex;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.button{
+color: blueviolet;
+
+}
