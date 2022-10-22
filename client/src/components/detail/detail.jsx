@@ -31,7 +31,7 @@ useEffect(()=>{
                 <div className={styles.main}>
                 <div className={styles.cover}></div>
                 <img src={bgimage} alt="imagen de fondo" className={styles.bgimage}/>
-                     <div>
+                     <div className={styles.div_home}>
                         <Link to='/home'>
                         <button className={styles.home}>Home</button>
                         </Link>

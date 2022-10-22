@@ -26,11 +26,12 @@
 
 .div_button{
     position: absolute;
-    margin-left: 200px;
+    margin-left: 150px;
     margin-top: 100px;
     z-index: 5;
     text-align: center;
     font-size: 60px;
+    font-family: 'Warnes', cursive;
     font-style: oblique;
     font-weight: 300;
     text-decoration: none;
@@ -47,7 +48,7 @@
         0 0 92px #0fa,
         0 0 102px #0fa,
         0 0 151px #0fa;
-        border: 0.2rem solid #fff;
+        border: 0.5rem solid #fff;
         border-radius: 2rem;
         box-shadow: 0 0 .2rem #fff,
                   0 0 .2rem #fff,
@@ -110,7 +111,7 @@
 }
 
 .span{
-    font-family: monospace;
+    font-family: 'Comfortaa', cursive;
     padding-top: 60px;
     padding-left: 80px;
     /* color: #8a2be2; */
@@ -127,3 +128,6 @@
         0 0 102px #8a2be2,
         0 0 151px #8a2be2;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Warnes&display=swap');
