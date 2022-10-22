@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import BgVideo from './bgvideo.mp4'
+import BgVideo from './bgvideo2.mp4'
 import styles from './landing.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllGames, getAllGenres } from '../../redux/actions'
 
 const Landing = ()=>{
+
+const dispatch = useDispatch();
+const games = useSelector(state=>state.videoGames)
+
+useEffect(()=>{
+    dispatch(getAllGames());
+    dispatch(getAllGenres());
+},[])
 
     return(
         <div className={styles.main}>
@@ -15,7 +25,7 @@ const Landing = ()=>{
             </div>
             <Link to= '/home'>
             <div className={styles.div_button}>           
-                <span className={styles.button}>Ingresar</span>
+                {games.length !== 0 && <span className={styles.button}>Ingresar</span>}
             </div>
             </Link>
             </div>
