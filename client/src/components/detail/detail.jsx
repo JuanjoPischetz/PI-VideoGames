@@ -3,6 +3,8 @@ import { Link, useParams, Redirect, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
 import { getGameByID, cleaner, deleteGame } from "../../redux/actions";
+import styles from './detail.module.css';
+import bgimage from './bg_image.jpg';
 
 const Detail = ()=>{
 
@@ -24,42 +26,44 @@ useEffect(()=>{
         if (flag){
            return <Redirect to='/*'/>
         }
-        if (allDetails?.name){
+        else {
             return (
-                <div>
+                <div className={styles.main}>
+                <div className={styles.cover}></div>
+                <img src={bgimage} alt="imagen de fondo" className={styles.bgimage}/>
                      <div>
                         <Link to='/home'>
-                        <button>Home</button>
+                        <button className={styles.home}>Home</button>
                         </Link>
                     </div>
-                    <div>
-                        { id.includes('-') && <button onClick={handleDelete}>Delete</button>}
+                    <div className={styles.div_delete}>
+                        { id.includes('-') && <button className={styles.delete} onClick={handleDelete}>Delete</button>}
                     </div>
-                    <div>
-                    <div>
-                        <img src={allDetails.image} alt="imagen del juego" />
-                        <span>{allDetails.description}</span>
+                    
+                    { allDetails.name && <div className={styles.container}>
+                    <div className={styles.image_container}>
+                        <img className={styles.image} src={allDetails.image} alt="imagen del juego" />
+                        <span className={styles.description}>{allDetails.description}</span>
                     </div>
                     <div>
                         <ul>
-                            <p>Name:</p>
-                            <p>{allDetails.name}</p>
-                            <p>Rating:</p>
-                            <p>{allDetails.rating}</p>
-                            <p>Release Date:</p>
-                            <p>{allDetails.release_date}</p>
-                            <p>Platforms:</p>
-                            <p>{allDetails.platforms.join(', ')}</p>
-                            <p> Genres:</p>
-                            <p>{allDetails.genres.join(', ')}</p>
+                            <span className={styles.title}>Name:</span>
+                            <p className={styles.text}>{allDetails.name}</p>
+                            <p className={styles.title}>Rating:</p>
+                            <p className={styles.text}>{allDetails.rating}</p>
+                            <p className={styles.title}>Release Date:</p>
+                            <p className={styles.text}>{allDetails.release_date}</p>
+                            <p className={styles.title}>Platforms:</p>
+                            <p className={styles.text}>{allDetails.platforms.join(', ')}</p>
+                            <p className={styles.title}> Genres:</p>
+                            <p className={styles.text}>{allDetails.genres.join(', ')}</p>
                         </ul>
                     </div>
-                    </div>
+                    </div>}
+                    
                 </div>
             )
         }
-        else return null;
-
 }
 
 export default Detail
