@@ -3,6 +3,8 @@ import { Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
 import { createGame,getAllGenres } from "../../redux/actions";
+import styles from './create_vg.module.css';
+import bgImage from './bg_image.jpg';
 
 const CreateVideogame = () =>{
 const dispatch = useDispatch();
@@ -12,7 +14,7 @@ const [input, setInput] = useState({
     image:'',
     description:'',
     release_date:'',
-    rating:0,
+    rating:'',
     platforms:[],
     genres:[]
 })
@@ -103,36 +105,40 @@ const selectHandler2 = function(e){
   };
 
         return(
-            <div>
-                <div>
+            <div className={styles.main}>
+                <div className={styles.div_home}>
                     <Link to='/home'>
                     <button>Home</button>
                     </Link>
                 </div>
-                <form onSubmit={submitHandler}>
-                    <div>
-                    <label htmlFor="name">Nombre</label>
-                    <input type="text" name="name" onChange={inputHandler} value={input.name} placeholder='Obligatorio'/>
+                <form onSubmit={submitHandler} className={styles.container}>
+                    <div className={styles.campos}>
+                    <label htmlFor="name">Name :</label>
+                    <input type="text" name="name" onChange={inputHandler} value={input.name}
+                     placeholder='Field Required' className={errors.name ? styles.error : styles.correct}/>
                     </div>
-                    <div>
-                    <label htmlFor="image">Imagen</label>
-                    <input type="text" name="image" onChange={inputHandler} value={input.image}/>
+                    <div className={styles.campos}>
+                    <label htmlFor="image">Imagen :</label>
+                    <input type="text" name="image" onChange={inputHandler} value={input.image} className = {styles.correct}/>
                     </div>
-                    <div>
-                    <label htmlFor="description">Descripción</label>
-                    <input type="text" name="description" onChange={inputHandler} value={input.description}placeholder='Obligatorio'/>
+                    <div className={styles.campos}>
+                    <label htmlFor="description">Description</label>
+                    <input type="text" name="description" onChange={inputHandler} value={input.description}
+                    placeholder='Field Required' className={errors.description ? styles.error : styles.correct}/>
                     </div>
-                    <div>
-                    <label htmlFor="release_date">Fecha de Lanzamiento</label>
+                    <div className={styles.campos}>
+                    <label htmlFor="release_date">Release Date</label>
                     <input type="date" name="release_date" onChange={inputHandler} value={input.release_date}/>
                     </div>
-                    <div>
+                    <div className={styles.campos}>
                     <label htmlFor="rating">Rating</label>
-                    <input type="text" name="rating" onChange={inputHandler} value={input.rating}/>
+                    <input type="text" name="rating" onChange={inputHandler} value={input.rating}
+                    className={errors.rating ? styles.error : styles.correct} placeholder='Score me!'/>
                     </div>
-                    <div>
-                    <label htmlFor="Plataformas">Plataformas</label><select onChange={selectHandler2}>
-                    {!input.platforms.length && <option value='none'>selecciona</option>}
+                    <div className={styles.campos}>
+                    <label htmlFor="Plataformas">Platforms</label>
+                    <select onChange={selectHandler2} className={errors.platforms ? styles.error : styles.correct}>
+                    {!input.platforms.length && <option value='none'>select</option>}
                     {
                         platformsArray?.map(gen =>{
                             return(
@@ -147,8 +153,10 @@ const selectHandler2 = function(e){
                         )
                     })}
                     </div>
-                    <label htmlFor="Generos">Generos</label><select onChange={selectHandler}>
-                    {!input.genres.length && <option value='none'>selecciona</option>}
+                    <div className={styles.campos}>
+                    <label htmlFor="Generos">Genres</label>
+                    <select onChange={selectHandler} className={styles.correct}>
+                    {!input.genres.length && <option value='none'>select</option>}
                     {
                         genresOnDb?.map(gen =>{
                             return(
@@ -162,9 +170,10 @@ const selectHandler2 = function(e){
                             <button value={gen} name={gen} onClick={deleteHandler}>{gen}</button>
                         )
                     })}
+                    </div>
                     <div>
-                    {(input.name !== ''&& input.description !== '' && !errors.platforms) 
-                    && <button type="submit">Crear!</button>}
+                    {(input.name !== ''&& input.description !== '' && !errors.platforms && !errors.rating) 
+                    && <button type="submit">Create!</button>}
                     </div>
                 </form>
             </div>

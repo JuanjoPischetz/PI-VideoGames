@@ -25,7 +25,7 @@ useEffect(()=>{
             </div>
             <Link to= '/home'>
             <div className={styles.div_button}>           
-                {games.length !== 0 && <span className={styles.button}>Ingresar</span>}
+                {games.length !== 0 && <span className={styles.button}>Start Now</span>}
             </div>
             </Link>
             </div>

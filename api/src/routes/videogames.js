@@ -122,7 +122,7 @@ router.post('/', async (req,res)=>{
         }
     } catch (error) {
         console.error(error)
-        res.status(400).send('Algo salio malen /POST');
+        res.status(400).send('Nombre repetido');
     }
 })
 

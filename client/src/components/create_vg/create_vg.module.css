@@ -1,0 +1,69 @@
+.main{
+    width: 100%;
+    height: 100vh;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    position: absolute;
+    width: 500px;
+    min-height: 400px;
+    max-height: fit-content;
+    padding-left: 20px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 0.2rem solid #fff;
+    border-radius: 2rem;
+    box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem rgb(255, 255, 255),
+                0 0 2rem #8a2be2,
+                0 0 0.8rem #8a2be2,
+                0 0 2.8rem #8a2be2,
+                inset 0 0 1.3rem #8a2be2;
+}
+.campos{
+    padding-bottom: 15px;
+}
+label{
+padding-right: 20px;
+font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    font-family: 'Comfortaa', cursive;
+    color: white;
+    text-shadow: 
+        0 0 7px #fff,
+        0 0 10px red,
+        0 0 21px red,
+        0 0 42px red,
+        0 0 82px red,
+        0 0 92px red,
+        0 0 102px red,
+        0 0 151px red;
+}
+.correct{
+    border: 1px solid #0fa;
+    box-shadow: 0 0 .2rem #0fa,
+                0 0 .2rem #0fa;
+}
+.error{
+    border: 1px solid red;
+    box-shadow: 0 0 .2rem red,
+                0 0 .2rem red;
+                
+}
+button{
+    margin-top: 10px;
+    margin-right: 5px;
+}
+.div_home{
+    position: absolute;
+    top: 0;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');

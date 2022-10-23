@@ -63,6 +63,8 @@ export const createGame=(data)=>{
         }
     } catch (error) {
         console.error(error);
+        if (error.message)
+        alert('Ya existe un Juego con ese nombre!')
     }
 }
 //filtrado por genero
