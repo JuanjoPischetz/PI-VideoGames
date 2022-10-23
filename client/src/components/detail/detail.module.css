@@ -23,6 +23,7 @@
 }
 .container{
     width: 900px;
+    min-height: 600px;
     max-height: fit-content;
     height: auto;
     display: flex;
@@ -72,6 +73,9 @@
         0 0 102px rgb(68, 0, 255),
         0 0 151px rgb(68, 0, 255);
 }
+.title:hover{
+    color: transparent;
+}
 .text{
     margin-left: 15px;
     font-size: 18px;
@@ -108,6 +112,7 @@
 .delete:hover{
     animation: flicker 1.5s infinite alternate;
     color: #fff;
+    cursor: pointer;
 }
 .div_home{
     position: absolute;
@@ -126,17 +131,18 @@
         0 0 7px #fff,
         0 0 10px #fff,
         0 0 21px #fff,
-        0 0 42px #0fa,
-        0 0 82px #0fa,
-        0 0 92px #0fa,
-        0 0 102px #0fa,
-        0 0 150px #0fa;
+        0 0 42px rgba(0, 255, 42, 0.87),
+        0 0 82px rgba(0, 255, 42, 0.87),
+        0 0 92px rgba(0, 255, 42, 0.87),
+        0 0 102px rgba(0, 255, 42, 0.87),
+        0 0 150px rgba(0, 255, 42, 0.87);
     border: transparent;
 }
 
 .home:hover{
     animation: flicker2 1.5s infinite alternate;
     color: #fff;
+    cursor: pointer;
 }
 
 @keyframes flicker2 {
@@ -148,11 +154,11 @@
         0 0 7px #fff,
         0 0 10px #fff,
         0 0 21px #fff,
-        0 0 42px #0fa,
-        0 0 82px #0fa,
-        0 0 92px #0fa,
-        0 0 102px #0fa,
-        0 0 151px #0fa;
+        0 0 42px rgba(0, 255, 42, 0.87),
+        0 0 82px rgba(0, 255, 42, 0.87),
+        0 0 92px rgba(0, 255, 42, 0.87),
+        0 0 102px rgba(0, 255, 42, 0.87),
+        0 0 150px rgba(0, 255, 42, 0.87);
     }
     
     20%, 24%, 55% {        

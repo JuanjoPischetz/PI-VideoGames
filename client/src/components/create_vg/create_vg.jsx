@@ -80,14 +80,15 @@ const selectHandler = function(e){
     })
 }
 const selectHandler2 = function(e){
-    setInput({
+    if(input.platforms.includes(e.target.value)) setInput(input)
+    else {setInput({
         ...input,
         platforms: [...input.platforms, e.target.value]
     })
     setErrors(validaciones({
         ...input,
         platforms: [...input.platforms,e.target.value]
-    }))
+    }))}
 
 }
   const submitHandler = (evento) => {
@@ -106,9 +107,11 @@ const selectHandler2 = function(e){
 
         return(
             <div className={styles.main}>
+                <div className={styles.cover}></div>
+                <img src={bgImage} alt="Background Image" className={styles.image}/>
                 <div className={styles.div_home}>
                     <Link to='/home'>
-                    <button>Home</button>
+                    <button className={styles.home}>Home</button>
                     </Link>
                 </div>
                 <form onSubmit={submitHandler} className={styles.container}>
@@ -119,24 +122,26 @@ const selectHandler2 = function(e){
                     </div>
                     <div className={styles.campos}>
                     <label htmlFor="image">Imagen :</label>
-                    <input type="text" name="image" onChange={inputHandler} value={input.image} className = {styles.correct}/>
+                    <input type="text" name="image" onChange={inputHandler} placeholder='URL Only'
+                    value={input.image} className = {styles.correct}/>
                     </div>
                     <div className={styles.campos}>
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Description :</label>
                     <input type="text" name="description" onChange={inputHandler} value={input.description}
                     placeholder='Field Required' className={errors.description ? styles.error : styles.correct}/>
                     </div>
                     <div className={styles.campos}>
-                    <label htmlFor="release_date">Release Date</label>
-                    <input type="date" name="release_date" onChange={inputHandler} value={input.release_date}/>
+                    <label htmlFor="release_date">Release Date :</label>
+                    <input type="date" name="release_date" onChange={inputHandler} value={input.release_date}
+                    className={styles.correct}/>
                     </div>
                     <div className={styles.campos}>
-                    <label htmlFor="rating">Rating</label>
+                    <label htmlFor="rating">Rating :</label>
                     <input type="text" name="rating" onChange={inputHandler} value={input.rating}
                     className={errors.rating ? styles.error : styles.correct} placeholder='Score me!'/>
                     </div>
                     <div className={styles.campos}>
-                    <label htmlFor="Plataformas">Platforms</label>
+                    <label htmlFor="Plataformas">Platforms :</label>
                     <select onChange={selectHandler2} className={errors.platforms ? styles.error : styles.correct}>
                     {!input.platforms.length && <option value='none'>select</option>}
                     {
@@ -149,12 +154,13 @@ const selectHandler2 = function(e){
                     </select> <br />
                     {input.platforms.length !== 0 && input.platforms.map(gen =>{
                         return(
-                            <button value={gen} name={gen} onClick={deleteHandler2}>{gen}</button>
+                            <button value={gen} name={gen} onClick={deleteHandler2}
+                            className={styles.buttonOpt}>{gen}</button>
                         )
                     })}
                     </div>
                     <div className={styles.campos}>
-                    <label htmlFor="Generos">Genres</label>
+                    <label htmlFor="Generos">Genres :</label>
                     <select onChange={selectHandler} className={styles.correct}>
                     {!input.genres.length && <option value='none'>select</option>}
                     {
@@ -167,13 +173,14 @@ const selectHandler2 = function(e){
                     </select> <br />
                     {input.genres.length !== 0 && input.genres.map(gen =>{
                         return(
-                            <button value={gen} name={gen} onClick={deleteHandler}>{gen}</button>
+                            <button value={gen} name={gen} onClick={deleteHandler}
+                            className={styles.buttonOpt}>{gen}</button>
                         )
                     })}
                     </div>
-                    <div>
+                    <div className={styles.div_create}>
                     {(input.name !== ''&& input.description !== '' && !errors.platforms && !errors.rating) 
-                    && <button type="submit">Create!</button>}
+                    && <button type="submit" className={styles.create}>Create!</button>}
                     </div>
                 </form>
             </div>
