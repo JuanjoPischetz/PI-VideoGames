@@ -52,8 +52,9 @@
 .div_searchBar{
     position: fixed;
     z-index: 5;
-    top: 40px;
+    top: 20px;
     right: 90px;
+    /* right 90px */
     width: fit-content;
     height: 50px;
     display: flex;
@@ -74,7 +75,7 @@
     flex-direction: row;
     position: fixed;
     z-index: 5;
-    top: 60px
+    top: 39px
 }
 .div_reload{
     position: relative;
