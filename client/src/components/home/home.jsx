@@ -6,6 +6,8 @@ import { getAllGames, getAllGenres, filterByGender, flagGlobal,
 import { Link } from "react-router-dom";
 import Card from "../card/card";
 import Paginado from "../paginado/paginado";
+import styles from './home.module.css';
+import bgImage from './bg_image.jpg';
 
 
 const Home  = () =>{
@@ -29,16 +31,12 @@ const pages = (pageNum)=>{
     setNextPage(pageNum +1);
     setPrevPage(pageNum-1);
 }
-
-
 useEffect( ()=>{
     if(!flag){
     dispatch(getAllGames());
     dispatch(getAllGenres());
     };
 },[]);
-
-
 function reloadMain(e){
     e.preventDefault();
     dispatch(getAllGames())
@@ -75,31 +73,47 @@ function handleRating(e){
 }
 
     return(
-        <div>
-            <div>
+        <div className={styles.main}>
+            <div className={styles.cover}></div>
+            <img src={bgImage} alt="Background image" className={styles.image}/>
+            <div className={styles.div_create_searchBar}>
+                <div className={styles.div_create}>
                 <Link to='/create'>
-                <button>Crear Videojuego</button>
+                <button className={styles.create}>Create VideoGame</button>
                 </Link>
-                <input type="search" name="searchBar" placeholder="Ingresa un nombre" value={searchBar} onChange={handleInput}/>
-                <button onClick={handleSearch}>Buscar</button>
+                </div>
+                <div className={styles.div_searchBar}>
+                <div className={styles.div_bar}>
+                <input type="search" name="searchBar" placeholder="Search by Name..." 
+                value={searchBar} onChange={handleInput} className= {styles.bar}/>
+                </div>
+                <div>
+                <button onClick={handleSearch} className={styles.search}>Search</button>
+                </div>
+                </div>
+            <div className={styles.div_filterBar}>
+            <div className={styles.div_reload}>
+            <button value='reload' onClick={e => reloadMain(e)} 
+            className={styles.reload}>Reload</button>
             </div>
-            <div>
-            <button value='reload' onClick={e => reloadMain(e)}>Reload</button>
+                <div className={styles.div_select}>
+                    
                 <select onChange={(e)=> handleFilterCreated(e)}>
-                    <option value="All"> Todos</option>
-                    <option value="myGames">Mis Juegos</option>
-                    <option value="API">Otros Juegos</option>
+                    <option value="All"> All Games</option>
+                    <option value="myGames">My Games</option>
+                    <option value="API">Foreing Games</option>
                 </select>
+                    
                 <select onChange={e => handleAsc(e)}>
                     <option value="A-z">A-Z</option>
                     <option value="Z-a">Z-A</option>
                 </select>
                 <select onChange={e => handleRating(e)}>
-                    <option value="Mayor">Mejor Puntuados</option>
-                    <option value="Menor">Peor Puntuados</option>
+                    <option value="Mayor">Best Scored</option>
+                    <option value="Menor">Worst Scored</option>
                 </select>
                 <select onChange={(e)=> handleFilterGenres(e)}>
-                    <option value="allGenres">Todos</option>
+                    <option value="allGenres">All Genres</option>
                 {
                     genresOnDb?.map(gen =>{
                         return(
@@ -108,13 +122,19 @@ function handleRating(e){
                     })
                 }
                 </select>
+                </div>
             </div>
+            </div>
+            <div className={styles.trickySpace}></div>
+            <div>
             <Paginado
             howManyGames={howManyGames}
             allVideoGames = {allVideoGames.length}
             pages={pages} current={currentPage}
             next = {nextPage} prev={prevPage}
             />
+            </div>
+            <div className={styles.div_cards}>
             {
                 showGames?.map( vg =>{
                     return (
@@ -124,6 +144,7 @@ function handleRating(e){
                     )
                 })
             }
+            </div>
         </div>
     )
 }

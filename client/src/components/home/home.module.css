@@ -1,0 +1,240 @@
+.main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cover{
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.image{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    z-index: -2;
+}
+.trickySpace{
+    width: 100%;
+    height: 80px;
+}
+.div_cards{
+    width: 80%;
+    height: 2000px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-around;
+    justify-content: center;
+    gap: 20px;
+}
+/* Sección posicionamiento Barra Flotante */
+.div_create_searchBar{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.div_searchBar{
+    position: fixed;
+    top: 40px;
+    right: 90px;
+    width: fit-content;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+.div_bar{
+    margin-top: 12px;
+}
+.div_create{
+    position: fixed;
+    left:100px;
+    width: 100px;
+}
+.div_filterBar{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 60px
+}
+.div_reload{
+    position: relative;
+    bottom: 18px;
+    right: 30px;
+}
+/* Estilizado de la  Barra Flotante*/
+
+.create{
+    font-size: 30px;
+    font-style: oblique;
+    font-weight: lighter;
+    font-family: 'Warnes', cursive;
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px rgba(0, 255, 42, 0.87),
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgba(0, 255, 42, 0.87),
+        0 0 60px rgba(0, 255, 42, 0.87);
+    border: transparent;
+}
+.create:hover{
+    animation: flicker2 1.5s infinite alternate;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search{
+    font-size: 30px;
+    font-style: oblique;
+    font-weight: lighter;
+    font-family: 'Warnes', cursive;
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px rgb(49, 250, 240),
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgb(49, 250, 240),
+        0 0 82px rgb(49, 250, 240),
+        0 0 92px rgb(49, 250, 240),
+        0 0 102px rgb(49, 250, 240),
+        0 0 150px rgb(49, 250, 240);
+    border: transparent;
+}
+.search:hover{
+    animation: flicker 1.5s infinite alternate;
+    color: #fff;
+    cursor: pointer;
+}
+.bar{
+    background-color: transparent;
+    color: white;
+    text-shadow: 0 0 7px #fff;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem rgb(49, 250, 240),
+                0 0 0.5rem rgb(49, 250, 240);
+    height: 25px;
+}
+
+.reload{
+    font-size: 30px;
+    font-style: oblique;
+    font-weight: lighter;
+    font-family: 'Warnes', cursive;
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px rgb(255, 75, 225),
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgb(255, 75, 225),
+        0 0 82px rgb(255, 75, 225),
+        0 0 92px rgb(255, 75, 225),
+        0 0 102px rgb(255, 75, 225),
+        0 0 150px rgb(255, 75, 225);
+    border: transparent;
+}
+.reload:hover{
+    animation: flicker3 1s infinite alternate;
+    color: #fff;
+    cursor: pointer;
+}
+.div_select{
+    position: relative;
+    right: 30px;
+    height: 25px;
+}
+.div_select select{
+    height: 25px;
+    background-color: transparent;
+    color: white;
+    text-shadow: 0 0 7px rgb(255, 255, 255);
+    border: 1px solid #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem rgb(49, 250, 240),
+                0 0 0.5rem rgb(49, 250, 240);
+}
+.div_select select option{
+    background-color: rgba(0, 0, 0);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Warnes&display=swap');
+
+@keyframes flicker {
+    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    
+    color: #fff;
+    text-shadow: 
+        0 0 7px rgb(49, 250, 240),
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgb(49, 250, 240),
+        0 0 82px rgb(49, 250, 240),
+        0 0 92px rgb(49, 250, 240),
+        0 0 102px rgb(49, 250, 240),
+        0 0 150px rgb(49, 250, 240);
+    }
+    
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }  
+  }
+
+@keyframes flicker2 {
+    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    
+    color: #fff;
+    text-shadow: 
+        0 0 7px rgba(0, 255, 42, 0.87),
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgba(0, 255, 42, 0.87),
+        0 0 60px rgba(0, 255, 42, 0.87);
+    }
+    
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }  
+  }
+
+  @keyframes flicker3 {
+    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    
+    color: #fff;
+    text-shadow: 
+            0 0 7px rgb(255, 75, 225),
+            0 0 10px #fff,
+            0 0 21px #fff,
+            0 0 42px rgb(255, 75, 225),
+            0 0 82px rgb(255, 75, 225)
+            0 0 92px rgb(255, 75, 225),
+            0 0 102px rgb(255, 75, 225),
+            0 0 150px rgb(255, 75, 225);
+    }
+    
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }  
+  }
+
+  /* rgb(255, 75, 225) gua */

@@ -74,6 +74,8 @@ const deleteHandler2 = function(e){
 }
 
 const selectHandler = function(e){
+    if(input.genres.includes(e.target.value)) setInput(input)
+    else
     setInput({
         ...input,
         genres: [...input.genres, e.target.value]

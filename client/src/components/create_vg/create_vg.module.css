@@ -44,7 +44,25 @@
                 inset 0 0 1.3rem #8a2be2;
 }
 .campos{
+    position: relative;
     padding-bottom: 15px;
+}
+.campos select{
+    background-color: transparent;
+    color: white;
+    text-shadow: 0 0 7px rgb(255, 255, 255);
+}
+.campos select option{
+    background-color: rgba(0, 0, 0);
+}
+.campos input{
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 7px rgb(255, 255, 255);
+}
+.campos input::placeholder{
+    color: rgba(255, 255, 255, 0.712);
+    text-shadow: 0 0 7px rgb(255, 255, 255);
 }
 label{
 padding-right: 20px;

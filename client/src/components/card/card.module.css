@@ -13,8 +13,11 @@
                 0 0 .2rem rgb(255, 255, 255),
                 0 0 2rem #8a2be2,
                 0 0 0.8rem #8a2be2,
-                0 0 2.8rem #8a2be2,
                 inset 0 0 1.3rem #8a2be2;
+}
+.main:hover{
+    animation: flicker 0.8s infinite alternate;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 .div_text{
     width: 200px;
@@ -22,6 +25,7 @@
     top:0px;
 }
 .text{
+    cursor: default;
     text-align: center;
     font-size: 18px;
     font-weight: 500;
@@ -49,15 +53,16 @@
 .div_genres{
     width: 200px;
     max-height: 50px;
+    object-fit: contain;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    padding-bottom: 10px;
-    gap: 10px;
 }
 .genres{
+    margin: 5px;
+    cursor: default;
     font-size: 10px;
     font-weight: 400;
     padding: 5px;
@@ -74,5 +79,22 @@
                 0 0 .2rem rgb(4, 4, 173),
                 0 0 0.5rem rgb(4, 4, 173);
 }
+
+@keyframes flicker {
+    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        border: 0.2rem solid #fff;
+        border-radius: 2rem;
+        box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem rgb(255, 255, 255),
+                0 0 2rem #8a2be2,
+                0 0 0.8rem #8a2be2,
+                inset 0 0 1.3rem #8a2be2;
+    }
+    
+    30%, 60%, 90%{
+        box-shadow: none;
+    }    
+  }
 
 @import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
