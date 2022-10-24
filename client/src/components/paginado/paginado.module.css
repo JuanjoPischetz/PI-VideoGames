@@ -1,0 +1,175 @@
+.main{
+    position: static;
+    left: 174px;
+    width: 1000px;
+    min-height: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.container{
+    position: relative;
+    display: flex;
+    width: 60%;
+    min-height: 50px;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+.div_button{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: space-between;
+    gap: 10px;
+    min-width: 200px;
+    min-height: 50px;
+    width: 200px;
+    flex-grow: 1;
+    margin-top: 9px;
+}
+.prev{
+    position: absolute;
+    left: 125px;
+    min-height: 50px;
+}
+.prev button{
+    font-size: 20px;
+    font-style: oblique;
+    font-weight: lighter;
+    font-family: 'Comfortaa', cursive;
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px red,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px red,
+        0 0 82px red,
+        0 0 92px red,
+        0 0 102px red,
+        0 0 150px red;
+    border: transparent;
+}
+.prev button:hover{
+    cursor: pointer;
+}
+.next{
+    position: absolute;
+    right:110px;
+    min-height: 50px;
+}
+.next button{
+    font-size: 20px;
+    font-style: oblique;
+    font-weight: lighter;
+    font-family: 'Comfortaa', cursive;
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px blue,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px blue,
+        0 0 82px blue,
+        0 0 92px blue,
+        0 0 102px blue,
+        0 0 150px blue;
+    border: transparent;
+}
+.next button:hover{
+    cursor: pointer;
+}
+.numbers{
+margin: 0;
+font-size: 25px;
+    font-style: oblique;
+    font-weight: lighter;
+    font-family: 'Comfortaa', cursive;
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px #8a2be2,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #8a2be2,
+        0 0 82px #8a2be2,
+        0 0 92px #8a2be2,
+        0 0 102px #8a2be2,
+        0 0 150px #8a2be2;
+    border: transparent;
+}
+.numbers:hover{
+    cursor: pointer;
+}
+.current{
+    margin: 0;
+    font-size: 25px;
+    font-style: oblique;
+    font-weight: bolder;
+    font-family: 'Comfortaa', cursive;
+    background-color: transparent;
+    color: rgba(5, 224, 5, 0.8);
+    text-shadow: 
+        0 0 7px rgb(5, 224, 5),
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgb(5, 224, 5),
+        0 0 82px rgb(5, 224, 5),
+        0 0 92px rgb(5, 224, 5),
+        0 0 102px rgb(5, 224, 5),
+        0 0 150px rgb(5, 224, 5);
+    border: transparent;
+}
+.current:hover{
+    cursor: pointer;
+}
+
+.div_sign{
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+.title{
+    font-size: 180px;
+    font-weight: lighter;
+    font-family: 'Monoton';
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px #8a2be2,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #8a2be2,
+        0 0 82px #8a2be2,
+        0 0 92px #8a2be2,
+        0 0 102px #8a2be2,
+        0 0 150px #8a2be2;
+}
+.subtitle{
+    position: absolute;
+    top: 350px;
+    font-size: 55px;
+    font-weight: lighter;
+    font-family: 'Comfortaa', cursive;
+    background-color: transparent;
+    color: #fff;
+    text-shadow: 
+        0 0 7px red,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px red,
+        0 0 82px red,
+        0 0 92px red,
+        0 0 102px red,
+        0 0 150px red;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Monoton&display=swap');

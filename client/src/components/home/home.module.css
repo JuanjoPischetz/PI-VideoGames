@@ -25,9 +25,11 @@
     height: 80px;
 }
 .div_cards{
+    position: absolute;
+    z-index: 0;
     width: 80%;
-    height: 2000px;
-    padding-top: 50px;
+    min-height: fit-content;
+    top: 180px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -38,14 +40,18 @@
 }
 /* Sección posicionamiento Barra Flotante */
 .div_create_searchBar{
+    position: fixed;
+    z-index: 4;
     width: 100%;
-    margin-top: 20px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(0,0,0,0.4);
 }
 .div_searchBar{
     position: fixed;
+    z-index: 5;
     top: 40px;
     right: 90px;
     width: fit-content;
@@ -59,6 +65,7 @@
 }
 .div_create{
     position: fixed;
+    z-index: 5;
     left:100px;
     width: 100px;
 }
@@ -66,10 +73,12 @@
     display: flex;
     flex-direction: row;
     position: fixed;
+    z-index: 5;
     top: 60px
 }
 .div_reload{
     position: relative;
+    z-index: 5;
     bottom: 18px;
     right: 30px;
 }
