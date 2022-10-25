@@ -189,7 +189,7 @@ const selectHandler2 = function(e){
                     })}
                     </div>
                     <div className={styles.div_create}>
-                    {(input.name !== ''&& input.description !== '' && !errors.platforms && !errors.rating && !errors.genres) 
+                    {(input.name !== ''&& input.description !== '' && !errors.platforms && !errors.rating && input.genres.length) 
                     && <button type="submit" className={styles.create}>Create!</button>}
                     </div>
                 </form>
