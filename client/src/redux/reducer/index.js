@@ -42,7 +42,8 @@ const rootReducer = (state = initialState, action) => {
         case CREATE_GAME:
             return{
                 ...state,
-                videoGames: [...state.videoGames, action.payload]
+                videoGames: [...state.videoGames, action.payload],
+                videoGamesCopy:[...state.videoGamesCopy, action.payload]
             }
         case FILTER_BY_GENRE:
             const allVideoGames = state.videoGamesSelected;
@@ -50,16 +51,17 @@ const rootReducer = (state = initialState, action) => {
             : allVideoGames.slice().filter( e => e.genres.toString().includes(action.payload))
             return{
                 ...state,
-                videoGames: videoGamesFilter
+                videoGames: videoGamesFilter,
+                videoGamesCopy: videoGamesFilter
             }
         case FILTER_BY_CREATED:
-            const everyVideoGame = state.videoGamesCopy
+            const everyVideoGame = state.videoGamesCopy;
             const createdOrApi = action.payload === 'myGames' ? everyVideoGame.filter(e => typeof e.id === 'string') 
             : everyVideoGame.filter( e => (e.id)/(e.id)=== 1);
             return{
                 ...state,
                 videoGames: action.payload === 'All' ? everyVideoGame : createdOrApi,
-                videoGamesSelected: action.payload === 'All' ? everyVideoGame : createdOrApi
+                //videoGamesSelected: action.payload === 'All' ? everyVideoGame : createdOrApi
             }
         case ASCENDENTE:
             let sorted = action.payload === 'A-z' ?
@@ -71,7 +73,8 @@ const rootReducer = (state = initialState, action) => {
             })
             return{
                 ...state,
-                videoGames: sorted
+                videoGames: sorted,
+                videoGamesSelected: sorted
             }
         case BY_RATING:
             let sorted2 = action.payload === 'Menor'?
@@ -83,7 +86,9 @@ const rootReducer = (state = initialState, action) => {
             })
             return{
                 ...state,
-                videoGames: sorted2
+                videoGames: sorted2,
+                videoGamesSelected:sorted2
+                
             }
         case FLAG_GLOBAL:
             return{

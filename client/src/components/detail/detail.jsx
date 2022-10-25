@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams, Redirect, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { getGameByID, cleaner, deleteGame } from "../../redux/actions";
+import { getGameByID, cleaner, deleteGame, flagGlobal } from "../../redux/actions";
 import styles from './detail.module.css';
 import bgimage from './bg_image.jpg';
 
@@ -16,6 +16,7 @@ const history = useHistory();
 
 const handleDelete = function(e){
     dispatch(deleteGame(id));
+    dispatch(flagGlobal(false));
     alert('Borrado Exitosamente!')
     history.push('/home');
 }

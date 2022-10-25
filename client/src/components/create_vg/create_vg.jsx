@@ -2,7 +2,7 @@ import React from "react";
 import { Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { createGame,getAllGenres } from "../../redux/actions";
+import { createGame,getAllGenres,getAllGames} from "../../redux/actions";
 import styles from './create_vg.module.css';
 import bgImage from './bg_image.jpg';
 
@@ -11,9 +11,9 @@ const dispatch = useDispatch();
 let genresOnDb = useSelector(state => state.genres);
 const [input, setInput] = useState({
     name:'',
-    image:'',
+    image:undefined,
     description:'',
-    release_date:'',
+    release_date:undefined,
     rating:'',
     platforms:[],
     genres:[]
@@ -43,6 +43,9 @@ const validaciones = function(input){
     }
     if(!input.platforms.length){
         errors.platforms='Seleccione al menos una plataforma';
+    }
+    if(!input.genres.length){
+        errors.genres = 'Seleccione al menos un Genero';
     }
     return errors;
 }
@@ -80,6 +83,10 @@ const selectHandler = function(e){
         ...input,
         genres: [...input.genres, e.target.value]
     })
+    setErrors(validaciones({
+        ...input,
+        genres: [...input.genres,e.target.value]
+    }))
 }
 const selectHandler2 = function(e){
     if(input.platforms.includes(e.target.value)) setInput(input)
@@ -105,6 +112,7 @@ const selectHandler2 = function(e){
         platforms:[],
         genres:[]
     })
+    dispatch(getAllGames());
   };
 
         return(
@@ -163,7 +171,7 @@ const selectHandler2 = function(e){
                     </div>
                     <div className={styles.campos}>
                     <label htmlFor="Generos">Genres :</label>
-                    <select onChange={selectHandler} className={styles.correct}>
+                    <select onChange={selectHandler} className={errors.genres ? styles.error : styles.correct}>
                     {!input.genres.length && <option value='none'>select</option>}
                     {
                         genresOnDb?.map(gen =>{
@@ -181,7 +189,7 @@ const selectHandler2 = function(e){
                     })}
                     </div>
                     <div className={styles.div_create}>
-                    {(input.name !== ''&& input.description !== '' && !errors.platforms && !errors.rating) 
+                    {(input.name !== ''&& input.description !== '' && !errors.platforms && !errors.rating && !errors.genres) 
                     && <button type="submit" className={styles.create}>Create!</button>}
                     </div>
                 </form>
