@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { getAllGames, getAllGenres, filterByGender, flagGlobal,
+import { getAllGames, getAllGenres, filterByGender, flagGlobal,rememberCurrentPage,
          filterByCreated, ascendente, byRating, getGameByName } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../card/card";
@@ -16,31 +16,40 @@ const dispatch = useDispatch();
 const allVideoGames = useSelector(state => state.videoGames);
 let genresOnDb = useSelector(state => state.genres);
 let flag = useSelector(state => state.flag);
-const [currentPage, setCurrentPage] = useState(1);
+let currentPageMemo = useSelector(state => state.currentPageMemo);
+//const [currentPage, setCurrentPage] = useState(currentPageMemo);
 const [nextPage, setNextPage] = useState(2);
 const [prevPage, setPrevPage] = useState();
-const [howManyGames, setHowManyGames] = useState(15);
 const [flagAz, setFlagAz] = useState('');
 const [searchBar, setSearchBar] = useState('');
-const lastIndex = currentPage * howManyGames;
+const howManyGames = 15;
+const lastIndex = currentPageMemo * howManyGames;
 const firstIndex = lastIndex - howManyGames;
 const showGames = allVideoGames.slice(firstIndex, lastIndex);
 
 const pages = (pageNum)=>{
-    setCurrentPage(pageNum);
+    dispatch(rememberCurrentPage(pageNum));
     setNextPage(pageNum +1);
     setPrevPage(pageNum-1);
 }
+
 useEffect( ()=>{
     if(!flag){
     dispatch(getAllGames());
     dispatch(getAllGenres());
     };
 },[]);
+//////////////////////////////////////  Boton Reload //////////////////////////////////
 function reloadMain(e){
-    e.preventDefault();
-    dispatch(getAllGames())
+    dispatch(rememberCurrentPage(1));
+    dispatch(filterByGender('allGenres'));
+    dispatch(filterByCreated('All'));
+    dispatch(byRating('Mayor'));
+    dispatch(ascendente('A-z'));
+    dispatch(getAllGames());
 }
+
+////////////////////////////////////// INPUT y SEARCH //////////////////////////////////
 function handleInput(e){
     setSearchBar(e.target.value);
 }
@@ -49,24 +58,28 @@ async function handleSearch(){
     pages(1)
     dispatch(flagGlobal(true))
 }
+///////////////////////////////////////  FILTROS  ////////////////////////////////////
 function handleFilterGenres(e){
-    setCurrentPage(1);
+    //setCurrentPage(1);
+    dispatch(rememberCurrentPage(1))
     dispatch(filterByGender(e.target.value));
     dispatch(flagGlobal(true))
 }
 function handleFilterCreated(e){
-    setCurrentPage(1);
+//    setCurrentPage(1);
+    dispatch(rememberCurrentPage(1));
     dispatch(filterByCreated(e.target.value));
     dispatch(flagGlobal(true))
 }
+///////////////////////////////////////  SORT  ////////////////////////////////////
 function handleAsc(e){
-    setCurrentPage(1);
+ //   setCurrentPage(1);
     dispatch(ascendente(e.target.value));
     dispatch(flagGlobal(true))
     setFlagAz(`${e.target.value}`)
 }
 function handleRating(e){
-    setCurrentPage(1);
+ //   setCurrentPage(1);
     dispatch(byRating(e.target.value));
     dispatch(flagGlobal(true))
     setFlagAz(`${e.target.value}`)
@@ -130,7 +143,7 @@ function handleRating(e){
             <Paginado
             howManyGames={howManyGames}
             allVideoGames = {allVideoGames.length}
-            pages={pages} current={currentPage}
+            pages={pages} current={currentPageMemo}
             next = {nextPage} prev={prevPage}
             />
             </div>

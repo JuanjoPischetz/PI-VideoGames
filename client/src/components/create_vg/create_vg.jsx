@@ -2,7 +2,7 @@ import React from "react";
 import { Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
-import { createGame,getAllGenres,getAllGames} from "../../redux/actions";
+import { createGame,getAllGenres,getAllGames, flagGlobal, rememberCurrentPage} from "../../redux/actions";
 import styles from './create_vg.module.css';
 import bgImage from './bg_image.jpg';
 
@@ -14,7 +14,7 @@ const [input, setInput] = useState({
     image:undefined,
     description:'',
     release_date:undefined,
-    rating:'',
+    rating:0,
     platforms:[],
     genres:[]
 })
@@ -27,6 +27,10 @@ const platformsArray = ['PC', 'PlayStation 5','PlayStation 4', 'Xbox', 'Xbox 360
 
 useEffect(()=>{
     dispatch(getAllGenres());
+    return ()=>{
+        dispatch(flagGlobal(true));
+        dispatch(rememberCurrentPage(1));
+    };
 },[]);
 
 
@@ -38,7 +42,7 @@ const validaciones = function(input){
     if (!input.description){
         errors.description='Agregue una descripcion';
     }
-    if(input.rating <= 0 || input.rating>5 || !input.rating){
+    if(input.rating <= 0 || input.rating>5){
         errors.rating='Califica entre 1 y 5 incluido';
     }
     if(!input.platforms.length){
@@ -105,9 +109,9 @@ const selectHandler2 = function(e){
     dispatch(createGame(input))
     setInput({
         name:'',
-        image:'',
+        image:undefined,
         description:'',
-        release_date:'',
+        release_date:undefined,
         rating:0,
         platforms:[],
         genres:[]
@@ -147,8 +151,8 @@ const selectHandler2 = function(e){
                     </div>
                     <div className={styles.campos}>
                     <label htmlFor="rating">Rating :</label>
-                    <input type="text" name="rating" onChange={inputHandler} value={input.rating}
-                    className={errors.rating ? styles.error : styles.correct} placeholder='Score me!'/>
+                    <input type='number' name="rating" onChange={inputHandler} value={input.rating}
+                    className={errors.rating ? styles.error : styles.correct}/>
                     </div>
                     <div className={styles.campos}>
                     <label htmlFor="Plataformas">Platforms :</label>

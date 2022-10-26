@@ -14,21 +14,34 @@ export const FLAG_GLOBAL = 'FLAG_GLOBAL';
 export const CLEANER = 'CLEANER';
 export const REDIRECT = 'REDIRECT';
 export const RESET_FLAG404 = 'RESET_FLAG404';
+export const REMEMBER_CURRENT_PAGE ='REMEMBER_CURRENT_PAGE';
 
 
 //obtengo todos los juegos
 export const getAllGames=()=>{
     return async (dispatch)=>{
-        const json = await axios.get('http://localhost:3001/videogames');
-        return dispatch({type: GET_ALL_GAMES, payload: json.data})
+    try {
+            const json = await axios.get('http://localhost:3001/videogames');
+            return dispatch({type: GET_ALL_GAMES, payload: json.data})
+        
+    } catch (error) {
+        console.error(error);
+        alert('Error requesting the data from the API')
+    }
     }
 }
 //obtengo todos los géneros
 export const getAllGenres=()=>{
     return async (dispatch)=>{
-        const json = await axios.get('http://localhost:3001/genres');
-        return dispatch({type: GET_ALL_GENRES, payload: json.data})
+    try {
+            const json = await axios.get('http://localhost:3001/genres');
+            return dispatch({type: GET_ALL_GENRES, payload: json.data})
+        
+    } catch (error) {
+        console.error(error);
+        alert('Error requesting the data from the API')
     }
+}
 }
 //Busco Videogame por nombre
 export const getGameByName=(name)=>{
@@ -38,7 +51,7 @@ export const getGameByName=(name)=>{
             return dispatch({type: GET_GAME_BY_NAME, payload: json.data})
         } catch (error) {
             console.error(error);
-            alert('La busqueda no tendrá resultados',error)
+            alert('Search will have not results, try another name')
         }
     }
 }
@@ -56,17 +69,19 @@ export const getGameByID=(id)=>{
 }
 //Creo un Juego
 export const createGame=(data)=>{
+    return async ()=>{
     try {
-        return async ()=>{
             await axios.post('http://localhost:3001/videogames', data)
-            alert('VideoGame Creado Exitosamente!')
-        }
+            alert('Video Game Created Successfully!')
+        
     } catch (error) {
         console.error(error);
         if (error.message)
-        alert('Ya existe un Juego con ese nombre!')
+        alert('There is already a Game with that name!')
     }
 }
+}
+
 //filtrado por genero
 export const filterByGender=(genres)=>{
     return{
@@ -116,16 +131,23 @@ export const resetFlag404 = ()=>{
 }
 //Borro un juego
 export const deleteGame =(id)=>{
+    return async ()=>{
     try {
-        return async ()=>{
             await axios.delete(`http://localhost:3001/videogame/${id}`);
             
         }
-    } catch (error) {
-        alert('El juego ya ha sido eliminado',error);
+     catch (error) {
+        alert('The game has already been removed');
     }
 }
+}
 
+export const rememberCurrentPage = (page) =>{
+    return{
+        type: REMEMBER_CURRENT_PAGE,
+        payload: page
+    }
+}
 /*
 export const getAllGames = () => dispatch => {
     return fetch('http://localhost:3001/videogames')

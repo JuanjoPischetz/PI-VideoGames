@@ -23,8 +23,8 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.NOW
     },
     rating:{
-      type:DataTypes.FLOAT,
-      defaultValue: 0,
+      type:DataTypes.INTEGER,
+      defaultValue: 1,
     },
     platforms:{
       type: DataTypes.ARRAY(DataTypes.STRING),

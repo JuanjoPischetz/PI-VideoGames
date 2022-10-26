@@ -1,6 +1,6 @@
 import { GET_ALL_GAMES, GET_GAME_BY_ID, GET_GAME_BY_NAME,GET_ALL_GENRES, ASCENDENTE,
      REDIRECT, RESET_FLAG404,FILTER_BY_GENRE, CREATE_GAME,FILTER_BY_CREATED, DELETE_GAME,
-      BY_RATING, FLAG_GLOBAL, CLEANER} from "../actions";
+      BY_RATING, FLAG_GLOBAL, CLEANER, REMEMBER_CURRENT_PAGE} from "../actions";
 
 const initialState = {
     videoGames:[],
@@ -11,6 +11,7 @@ const initialState = {
     flag: false,
     flag_404:false,
     flag_alert:false,
+    currentPageMemo: 1,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -43,7 +44,8 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 videoGames: [...state.videoGames, action.payload],
-                videoGamesCopy:[...state.videoGamesCopy, action.payload]
+                videoGamesCopy:[...state.videoGamesCopy, action.payload],
+                videoGamesSelected: [...state.videoGamesCopy, action.payload]
             }
         case FILTER_BY_GENRE:
             const allVideoGames = state.videoGamesSelected;
@@ -115,6 +117,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 flag:true,
             };
+        case REMEMBER_CURRENT_PAGE:
+            return{
+                ...state,
+                currentPageMemo: action.payload
+            }
         default: return state;
     }
 };

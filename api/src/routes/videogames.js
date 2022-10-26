@@ -108,6 +108,8 @@ router.get('/', async (req,res)=>{
         res.status(400).send('Algo salio mal en /GET');
     }
 })
+
+////////////////////////////////////////////////  POST  ///////////////////////////////////////////////////
 router.post('/', async (req,res)=>{
     try {
         const {name, description, platforms, genres} = req.body;

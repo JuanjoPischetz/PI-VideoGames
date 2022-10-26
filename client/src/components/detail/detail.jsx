@@ -22,7 +22,9 @@ const handleDelete = function(e){
 }
 useEffect(()=>{
     dispatch(getGameByID(id))
-    return dispatch(cleaner())
+    return ()=>{
+        dispatch(cleaner())
+    }
 },[id]);
         if (flag){
            return <Redirect to='/*'/>
