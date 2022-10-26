@@ -21,7 +21,7 @@ useEffect(()=>{
             <video className={styles.video} src={BgVideo} autoPlay loop muted />
             <div className={styles.content}>
             <div className={styles.text}>
-                <span className={styles.span}>Welcome Gamer</span>
+                <span className={styles.span}>Welcome</span>
             </div>
             <Link to= '/home'>
             <div className={styles.div_button}>           
