@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import {useDispatch, useSelector } from 'react-redux';
 import { getAllGames, getAllGenres, filterByGender, flagGlobal,rememberCurrentPage,
          filterByCreated, ascendente, byRating, getGameByName } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Card from "../card/card";
 import Paginado from "../paginado/paginado";
 import styles from './home.module.css';
@@ -13,6 +13,7 @@ import bgImage from './bg_image.jpg';
 const Home  = () =>{
 
 const dispatch = useDispatch();
+const history = useHistory();
 const allVideoGames = useSelector(state => state.videoGames);
 let genresOnDb = useSelector(state => state.genres);
 let flag = useSelector(state => state.flag);
@@ -40,13 +41,10 @@ useEffect( ()=>{
     };
 },[]);
 //////////////////////////////////////  Boton Reload //////////////////////////////////
-function reloadMain(e){
+function reloadMain(){
     dispatch(rememberCurrentPage(1));
-    dispatch(filterByGender('allGenres'));
-    dispatch(filterByCreated('All'));
-    dispatch(byRating('Mayor'));
-    dispatch(ascendente('A-z'));
-    dispatch(getAllGames());
+    dispatch(flagGlobal(true));
+    window.location.reload();
 }
 
 ////////////////////////////////////// INPUT y SEARCH //////////////////////////////////
@@ -106,7 +104,7 @@ function handleRating(e){
                 </div>
             <div className={styles.div_filterBar}>
             <div className={styles.div_reload}>
-            <button value='reload' onClick={e => reloadMain(e)} 
+            <button value='reload' onClick={() => reloadMain()} 
             className={styles.reload}>Reload</button>
             </div>
                 <div className={styles.div_select}>
