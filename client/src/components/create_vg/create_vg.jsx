@@ -14,7 +14,7 @@ const [input, setInput] = useState({
     image:undefined,
     description:'',
     release_date:undefined,
-    rating:0,
+    rating:1,
     platforms:[],
     genres:[]
 })
@@ -112,7 +112,7 @@ const selectHandler2 = function(e){
         image:undefined,
         description:'',
         release_date:undefined,
-        rating:0,
+        rating:1,
         platforms:[],
         genres:[]
     })
@@ -152,7 +152,7 @@ const selectHandler2 = function(e){
                     <div className={styles.campos}>
                     <label htmlFor="rating">Rating :</label>
                     <input type='number' name="rating" onChange={inputHandler} value={input.rating}
-                    className={errors.rating ? styles.error : styles.correct}/>
+                    className={errors.rating ? styles.error : styles.correct} min="1" max="5" />
                     </div>
                     <div className={styles.campos}>
                     <label htmlFor="Plataformas">Platforms :</label>

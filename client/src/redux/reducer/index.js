@@ -86,7 +86,7 @@ const rootReducer = (state = initialState, action) => {
             })
             return{
                 ...state,
-                videoGames: sorted2,   
+                videoGames: sorted2 
             }
         case FLAG_GLOBAL:
             return{
