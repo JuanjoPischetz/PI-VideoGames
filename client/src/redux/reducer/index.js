@@ -63,7 +63,6 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 videoGames: action.payload === 'All' ? everyVideoGame : createdOrApi,
-                //videoGamesSelected: action.payload === 'All' ? everyVideoGame : createdOrApi
             }
         case ASCENDENTE:
             let sorted = action.payload === 'A-z' ?
@@ -76,7 +75,6 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 videoGames: sorted,
-                videoGamesSelected: sorted
             }
         case BY_RATING:
             let sorted2 = action.payload === 'Menor'?
@@ -88,9 +86,7 @@ const rootReducer = (state = initialState, action) => {
             })
             return{
                 ...state,
-                videoGames: sorted2,
-                videoGamesSelected:sorted2
-                
+                videoGames: sorted2,   
             }
         case FLAG_GLOBAL:
             return{

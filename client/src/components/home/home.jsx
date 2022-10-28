@@ -43,7 +43,7 @@ useEffect( ()=>{
 //////////////////////////////////////  Boton Reload //////////////////////////////////
 function reloadMain(){
     dispatch(rememberCurrentPage(1));
-    dispatch(flagGlobal(true));
+   // dispatch(flagGlobal(true));
     window.location.reload();
 }
 
