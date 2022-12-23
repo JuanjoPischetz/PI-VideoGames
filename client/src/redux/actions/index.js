@@ -21,7 +21,7 @@ export const REMEMBER_CURRENT_PAGE ='REMEMBER_CURRENT_PAGE';
 export const getAllGames=()=>{
     return async (dispatch)=>{
     try {
-            const json = await axios.get('http://localhost:3001/videogames');
+            const json = await axios.get('https://pivgapi-production.up.railway.app/videogames');
             return dispatch({type: GET_ALL_GAMES, payload: json.data})
         
     } catch (error) {
@@ -34,7 +34,7 @@ export const getAllGames=()=>{
 export const getAllGenres=()=>{
     return async (dispatch)=>{
     try {
-            const json = await axios.get('http://localhost:3001/genres');
+            const json = await axios.get('https://pivgapi-production.up.railway.app/genres');
             return dispatch({type: GET_ALL_GENRES, payload: json.data})
         
     } catch (error) {
@@ -47,7 +47,7 @@ export const getAllGenres=()=>{
 export const getGameByName=(name)=>{
     return async (dispatch)=>{
         try {
-            const json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+            const json = await axios.get(`https://pivgapi-production.up.railway.app/videogames?name=${name}`);
             return dispatch({type: GET_GAME_BY_NAME, payload: json.data})
         } catch (error) {
             console.error(error);
@@ -60,7 +60,7 @@ export const getGameByID=(id)=>{
 
     return async (dispatch)=>{
         try {
-        const json = await axios.get(`http://localhost:3001/videogame/${id}`);
+        const json = await axios.get(`https://pivgapi-production.up.railway.app/videogame/${id}`);
         return dispatch({type: GET_GAME_BY_ID, payload: json.data})
         } catch (error) {
         return dispatch({type: REDIRECT, payload:true})
@@ -71,7 +71,7 @@ export const getGameByID=(id)=>{
 export const createGame=(data)=>{
     return async ()=>{
     try {
-            await axios.post('http://localhost:3001/videogames', data)
+            await axios.post('https://pivgapi-production.up.railway.app/videogames', data)
             alert('Video Game Created Successfully!')
         
     } catch (error) {
@@ -133,7 +133,7 @@ export const resetFlag404 = ()=>{
 export const deleteGame =(id)=>{
     return async ()=>{
     try {
-            await axios.delete(`http://localhost:3001/videogame/${id}`);
+            await axios.delete(`https://pivgapi-production.up.railway.app/videogame/${id}`);
             
         }
      catch (error) {
